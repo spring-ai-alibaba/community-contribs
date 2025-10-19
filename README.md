@@ -13,7 +13,7 @@ Based on these components, developers can use Spring AI [ChatClient](https://jav
 
 ### Use `ChatClient` to Develop a Chatbot
 
-### Add Dependencies
+#### Add Dependencies
 To quickly get started with Spring AI Alibaba, add 'spring-ai-alibaba-starter-dashscope' dependency to your java project.
 
 ```xml
@@ -37,7 +37,7 @@ To quickly get started with Spring AI Alibaba, add 'spring-ai-alibaba-starter-da
 </dependencies>
 ```
 
-### Declare ChatClient
+#### Declare ChatClient
 Decare `ChatClient` an instance that would have `DashScopeChatModel` automatically injected.
 
 ```java
@@ -74,7 +74,7 @@ Please check [Quick Start](https://java2ai.com/docs/1.0.0.2/get-started/chatbot)
 
 // TBD
 
-### Playground and Example
+## Playground and Example
 
 The community has developed a [Playground](https://github.com/springaialibaba/spring-ai-alibaba-examples/tree/main/spring-ai-alibaba-playground) agent that includes a complete front-end UI and back-end implementation. The Playground back-end is developed using Spring AI Alibaba and gives users a quick overview of all core framework capabilities such as chatbot, multi-round conversations, image generation, multi-modality, tool calling, MCP, and RAG.
 
