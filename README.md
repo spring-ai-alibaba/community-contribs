@@ -109,7 +109,6 @@ DashScopeChatModel supports:
 - Function calling / Tool use
 - Streaming responses
 - Structured output
-```
 
 #### DashScopeImageModel
 
