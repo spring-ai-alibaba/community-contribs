@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2024-2025 the original author or authors.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.alibaba.cloud.ai</groupId>
+    <artifactId>spring-ai-alibaba-extensions</artifactId>
+    <version>${revision}</version>
+
+    <packaging>pom</packaging>
+    <name>Spring AI Extensions</name>
+    <description>Extensions of Spring AI core concepts and components.</description>
+    <url>https://github.com/alibaba/spring-ai-alibaba</url>
+
+    <modules>
+        <!-- document-parsers modules -->
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-apache-pdfbox</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-bibtex</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-bshtml</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-directory</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-markdown</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-multi-modality</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-pdf-tables</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-tika</module>
+        <module>document-parsers/spring-ai-alibaba-starter-document-parser-yaml</module>
+
+        <!-- document-readers modules -->
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-archive</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-arxiv</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-bilibili</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-chatgpt-data</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-elasticsearch</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-email</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-gitbook</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-github</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-gitlab</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-gpt-repo</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-huggingface-fs</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-larksuite</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-mbox</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-mongodb</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-mysql</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-notion</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-obsidian</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-onenote</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-poi</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-sqlite</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-tencent-cos</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-youtube</module>
+        <module>document-readers/spring-ai-alibaba-starter-document-reader-yuque</module>
+
+        <!-- memories modules -->
+        <module>memories/spring-ai-alibaba-starter-memory-elasticsearch</module>
+        <module>memories/spring-ai-alibaba-starter-memory-jdbc</module>
+        <module>memories/spring-ai-alibaba-starter-memory-mem0</module>
+        <module>memories/spring-ai-alibaba-starter-memory-memcached</module>
+        <module>memories/spring-ai-alibaba-starter-memory-mongodb</module>
+        <module>memories/spring-ai-alibaba-starter-memory-redis</module>
+        <module>memories/spring-ai-alibaba-starter-memory-tablestore</module>
+
+        <!-- auto-configurations modules -->
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-dashscope</module>
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-memory</module>
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-memory-long</module>
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-nacos-prompt</module>
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-arms-observation</module>
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-mcp-registry</module>
+        <module>auto-configurations/spring-ai-alibaba-autoconfigure-mcp-router</module>
+
+        <!-- spring-boot-starters modules -->
+        <module>spring-boot-starters/spring-ai-alibaba-starter-dashscope</module>
+        <module>spring-boot-starters/spring-ai-alibaba-starter-memory</module>
+        <module>spring-boot-starters/spring-ai-alibaba-starter-memory-long</module>
+        <module>spring-boot-starters/spring-ai-alibaba-starter-nacos-prompt</module>
+        <module>spring-boot-starters/spring-ai-alibaba-starter-arms-observation</module>
+        <module>spring-boot-starters/spring-ai-alibaba-starter-mcp-registry</module>
+        <module>spring-boot-starters/spring-ai-alibaba-starter-mcp-router</module>
+
+        <!-- tool-calls modules -->
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-alitranslate</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-aliyunaisearch</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-amap</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-baidumap</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-baidusearch</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-baidutranslate</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-bravesearch</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-common</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-dingtalk</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-duckduckgo</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-firecrawl</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-githubtoolkit</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-googlescholar</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-googletranslate</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-googletrends</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-jinacrawler</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-jsonprocessor</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-kuaidi100</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-larksuite</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-memcached</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-metaso</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-microsofttranslate</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-minio</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-ollamasearchmodel</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-openalex</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-opentripmap</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-regex</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-searches</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-sensitivefilter</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-serpapi</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-sinanews</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-tavilysearch</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-tencentmap</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-time</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-toutiaonews</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-tripadvisor</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-tushare</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-weather</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-wikipedia</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-worldbankdata</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-youdaotranslate</module>
+        <module>tool-calls/spring-ai-alibaba-starter-tool-calling-yuque</module>
+        <module>tool-calls/spring-ai-alibaba-tool-calling-bom</module>
+
+        <!-- vector-stores modules -->
+        <module>vector-stores/spring-ai-alibaba-starter-analyticdb-store</module>
+        <module>vector-stores/spring-ai-alibaba-starter-oceanbase-store</module>
+        <module>vector-stores/spring-ai-alibaba-starter-opensearch-store</module>
+        <module>vector-stores/spring-ai-alibaba-starter-tablestore-store</module>
+        <module>vector-stores/spring-ai-alibaba-starter-tair-store</module>
+
+        <module>mcp/spring-ai-alibaba-mcp-common</module>
+        <module>mcp/spring-ai-alibaba-mcp-registry</module>
+        <module>mcp/spring-ai-alibaba-mcp-router</module>
+
+        <module>prompt/spring-ai-alibaba-prompt-nacos</module>
+
+        <module>models/dashscope</module>
+
+        <module>observation</module>
+    </modules>
+
+    <scm>
+        <connection>git://github.com/alibaba/spring-ai-alibaba.git</connection>
+        <developerConnection>git@github.com:alibaba/spring-ai-alibaba.git</developerConnection>
+        <url>https://github.com/alibaba/spring-ai-alibaba</url>
+    </scm>
+
+    <properties>
+
+        <!-- Spring AI Alibaba Version -->
+        <revision>1.1.0.0-SNAPSHOT</revision>
+
+        <!-- Maven project basic config -->
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <!-- Spring version -->
+        <spring-ai.version>1.0.1</spring-ai.version>
+        <spring-boot.version>3.4.8</spring-boot.version>
+        <springdoc-openapi.version>2.8.8</springdoc-openapi.version>
+
+        <!-- DashScope SDK Version -->
+        <dashscope-sdk-java.version>2.15.1</dashscope-sdk-java.version>
+
+        <!-- Nacos -->
+        <nacos3.version>3.1.0</nacos3.version>
+        <nacos-client-mse-extension.version>1.0.6</nacos-client-mse-extension.version>
+        <spring-alibaba-nacos-config.version>2023.0.1.3</spring-alibaba-nacos-config.version>
+
+        <!-- Redis -->
+        <redission.version>3.22.0</redission.version>
+
+        <!-- Json -->
+        <gson.version>2.10.1</gson.version>
+        <fastjson.version>1.2.83</fastjson.version>
+
+        <okhttp.version>4.12.0</okhttp.version>
+
+        <async-generator.version>3.2.0</async-generator.version>
+
+        <commons-codec.version>1.17.0</commons-codec.version>
+        <commons-exec.version>1.3</commons-exec.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+
+        <docker-java.version>3.5.3</docker-java.version>
+
+        <opennlp-tools.version>2.3.3</opennlp-tools.version>
+
+        <json-path.version>2.9.0</json-path.version>
+
+        <jedis.version>5.2.0</jedis.version>
+
+        <redisson.version>3.42.0</redisson.version>
+
+        <mysql.version>8.0.32</mysql.version>
+
+        <postgresql.version>42.4.4</postgresql.version>
+
+        <commons-collections.version>3.2.2</commons-collections.version>
+
+        <commons-io.version>2.14.0</commons-io.version>
+
+        <commons-lang3.version>3.9</commons-lang3.version>
+
+        <webdrivermanager.version>6.1.0</webdrivermanager.version>
+
+        <httpclient5.version>5.4.3</httpclient5.version>
+
+        <poi.version>5.4.0</poi.version>
+
+        <mcp.version>0.11.2</mcp.version>
+        <opentelemetry.version>1.38.0</opentelemetry.version>
+        <a2a-sdk.version>0.2.5.Beta2</a2a-sdk.version>
+
+        <!-- CheckStyle Plugin -->
+        <disable.checks>false</disable.checks>
+
+        <!-- Unit Test Config -->
+        <surefireArgLine>-Xms512m -Xmx1024m</surefireArgLine>
+
+        <!-- plugin versions -->
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <maven-site-plugin.version>4.0.0-M13</maven-site-plugin.version>
+        <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+        <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+        <maven-assembly-plugin.version>3.7.0</maven-assembly-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
+        <asciidoctor-maven-plugin.version>2.2.3</asciidoctor-maven-plugin.version>
+        <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
+        <spring-javaformat-maven-plugin.version>0.0.39</spring-javaformat-maven-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+        <sorter-maven-plugin.version>1.0.1</sorter-maven-plugin.version>
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven.deploy.skip>false</maven.deploy.skip>
+
+        <!-- CheckStyle Maven Plugin -->
+        <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
+        <maven-checkstyle-plugin.failsOnError>true</maven-checkstyle-plugin.failsOnError>
+        <maven-checkstyle-plugin.failOnViolation>true</maven-checkstyle-plugin.failOnViolation>
+        <puppycrawl-tools-checkstyle.version>9.3</puppycrawl-tools-checkstyle.version>
+        <spotless.version>2.44.5</spotless.version>
+
+        <central.publishing.maven.version>0.7.0</central.publishing.maven.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dashscope-sdk-java</artifactId>
+                <version>${dashscope-sdk-java.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-simple</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.docker-java</groupId>
+                <artifactId>docker-java-bom</artifactId>
+                <version>${docker-java.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- A2A SDK Dependencies -->
+            <dependency>
+                <groupId>io.github.a2asdk</groupId>
+                <artifactId>a2a-java-reference-server</artifactId>
+                <version>${a2a-sdk.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.slf4j</groupId>
+                        <artifactId>slf4j-jboss-logmanager</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.github.a2asdk</groupId>
+                <artifactId>a2a-java-sdk-server-common</artifactId>
+                <version>${a2a-sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.a2asdk</groupId>
+                <artifactId>a2a-java-sdk-client</artifactId>
+                <version>${a2a-sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.modelcontextprotocol.sdk</groupId>
+                <artifactId>mcp-bom</artifactId>
+                <version>${mcp.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>io.spring.javaformat</groupId>
+                <artifactId>spring-javaformat-maven-plugin</artifactId>
+                <version>${spring-javaformat-maven-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>validate</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <inherited>true</inherited>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless.version}</version>
+                <configuration>
+                    <java>
+                        <removeUnusedImports></removeUnusedImports>
+                    </java>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>spotless-apply</id>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+                <configuration>
+                    <consoleOutput>true</consoleOutput>
+                    <configLocation>tools/src/checkstyle/checkstyle.xml</configLocation>
+                    <headerLocation>tools/src/checkstyle/checkstyle-header.txt</headerLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${puppycrawl-tools-checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>${java.version}</release>
+                    <compilerArgs>
+                        <compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
+                </configuration>
+                <executions>
+                    <!-- Replacing default-compile as it is treated specially by Maven -->
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <!-- Replacing default-testCompile as it is treated specially by Maven -->
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>java-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                    <execution>
+                        <id>java-test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>test-compile</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>${surefireArgLine}</argLine>
+
+                    <useFile>false</useFile>
+                    <trimStackTrace>false</trimStackTrace>
+
+                    <!-- Show test timing information -->
+                    <reportFormat>plain</reportFormat>
+
+                    <!-- Output test execution times in the logs -->
+                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
+
+                    <!-- Ignore missing test patterns -->
+                    <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Title>${project.artifactId}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>ossrh</flattenMode>
+                            <pomElements>
+                                <distributionManagement>remove</distributionManagement>
+                                <dependencyManagement>remove</dependencyManagement>
+                                <repositories>remove</repositories>
+                                <scm>keep</scm>
+                                <url>keep</url>
+                                <organization>resolve</organization>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>clean</id>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <phase>clean</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.github.tonycody.maven.plugins</groupId>
+                <artifactId>sorter-maven-plugin</artifactId>
+                <version>${sorter-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>sort</goal>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                    <skip>${maven.deploy.skip}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+
+            <distributionManagement></distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven-javadoc-plugin.version}</version>
+                        <configuration>
+                            <doclint>all,-missing</doclint>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <phase>verify</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <version>${flatten-maven-plugin.version}</version>
+                        <configuration>
+                            <updatePomFile>true</updatePomFile>
+                            <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <goals>
+                                    <goal>flatten</goal>
+                                </goals>
+                                <phase>process-resources</phase>
+                            </execution>
+                            <execution>
+                                <id>flatten.clean</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <phase>clean</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central.publishing.maven.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
