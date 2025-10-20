@@ -490,18 +490,18 @@ public class DashScopeChatModel implements ChatModel {
 						return new ToolCall(toolCall.id(), toolCall.type(), function);
 					}).toList();
 				}
-				
-				// Extract partial flag from metadata
+
 				Boolean partial = null;
 				if (assistantMessage.getMetadata() != null) {
 					Object partialValue = assistantMessage.getMetadata().get("partial");
 					if (partialValue instanceof Boolean) {
 						partial = (Boolean) partialValue;
-					} else if (partialValue instanceof String) {
+					}
+					else if (partialValue instanceof String) {
 						partial = Boolean.parseBoolean((String) partialValue);
 					}
 				}
-				
+
 				return List.of(new ChatCompletionMessage(assistantMessage.getText(),
 						ChatCompletionMessage.Role.ASSISTANT, null, null, toolCalls, null, partial));
 			}

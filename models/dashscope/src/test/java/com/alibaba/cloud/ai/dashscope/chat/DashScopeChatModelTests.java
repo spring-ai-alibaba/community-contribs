@@ -517,80 +517,54 @@ class DashScopeChatModelTests {
 
 	@Test
 	void testPartialModeForCodeCompletion() {
-		// Test partial mode for code completion scenario
-		// This tests the feature request from issue #298
-		
-		// Create messages with partial flag in assistant message metadata
-		Message systemMessage = new SystemMessage("You are a code completion assistant.");
-		Message userMessage = new UserMessage("Please complete this Fibonacci function without adding extra content.");
-		
-		// Create assistant message with partial flag set to true
+		// Test partial mode for code completion (Issue #298)
 		java.util.Map<String, Object> metadata = new java.util.HashMap<>();
 		metadata.put("partial", true);
 		Message assistantMessage = new AssistantMessage(
-			"def calculate_fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n",
-			metadata
-		);
-		
-		// Mock the API response
+				"def calculate_fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n", metadata);
+
 		ChatCompletionMessage responseMessage = new ChatCompletionMessage(
-			"        return calculate_fibonacci(n - 1) + calculate_fibonacci(n - 2)",
-			ChatCompletionMessage.Role.ASSISTANT
-		);
+				"        return calculate_fibonacci(n - 1) + calculate_fibonacci(n - 2)",
+				ChatCompletionMessage.Role.ASSISTANT);
 		Choice choice = new Choice(ChatCompletionFinishReason.STOP, responseMessage, null);
 		ChatCompletionOutput output = new ChatCompletionOutput("", List.of(choice), null);
 		TokenUsage usage = new TokenUsage(50, 20, 70, null, null, null, null, null, null);
 		ChatCompletion completion = new ChatCompletion(TEST_REQUEST_ID, output, usage);
-		
+
 		when(dashScopeApi.chatCompletionEntity(any(), any())).thenReturn(ResponseEntity.ok(completion));
-		
-		// Create prompt with all messages including the partial assistant message
-		Prompt prompt = new Prompt(List.of(systemMessage, userMessage, assistantMessage));
+
+		Prompt prompt = new Prompt(List.of(new UserMessage("Complete this Fibonacci function"), assistantMessage));
 		ChatResponse response = chatModel.call(prompt);
-		
-		// Verify the response
+
 		assertThat(response).isNotNull();
 		assertThat(response.getResults()).hasSize(1);
-		assertThat(response.getResult().getOutput().getText())
-			.contains("return calculate_fibonacci");
+		assertThat(response.getResult().getOutput().getText()).contains("return calculate_fibonacci");
 	}
 	
 	@Test
 	void testPartialModeWithStringValue() {
-		// Test partial mode with string "true" value (as shown in the issue)
-		// This should also work as the code converts string to boolean
-		
-		Message userMessage = new UserMessage("Complete this code:");
-		
-		// Create assistant message with partial as string "true"
+		// Test partial mode with string value (backward compatibility)
 		java.util.Map<String, Object> metadata = new java.util.HashMap<>();
 		metadata.put("partial", "true");
 		Message assistantMessage = new AssistantMessage(
-			"public class HelloWorld {\n    public static void main(String[] args) {\n",
-			metadata
-		);
-		
-		// Mock the API response
+				"public class HelloWorld {\n    public static void main(String[] args) {\n", metadata);
+
 		ChatCompletionMessage responseMessage = new ChatCompletionMessage(
-			"        System.out.println(\"Hello, World!\");\n    }\n}",
-			ChatCompletionMessage.Role.ASSISTANT
-		);
+				"        System.out.println(\"Hello, World!\");\n    }\n}",
+				ChatCompletionMessage.Role.ASSISTANT);
 		Choice choice = new Choice(ChatCompletionFinishReason.STOP, responseMessage, null);
 		ChatCompletionOutput output = new ChatCompletionOutput("", List.of(choice), null);
 		TokenUsage usage = new TokenUsage(30, 15, 45, null, null, null, null, null, null);
 		ChatCompletion completion = new ChatCompletion(TEST_REQUEST_ID, output, usage);
-		
+
 		when(dashScopeApi.chatCompletionEntity(any(), any())).thenReturn(ResponseEntity.ok(completion));
-		
-		// Create prompt
-		Prompt prompt = new Prompt(List.of(userMessage, assistantMessage));
+
+		Prompt prompt = new Prompt(List.of(new UserMessage("Complete this code"), assistantMessage));
 		ChatResponse response = chatModel.call(prompt);
-		
-		// Verify the response
+
 		assertThat(response).isNotNull();
 		assertThat(response.getResults()).hasSize(1);
-		assertThat(response.getResult().getOutput().getText())
-			.contains("System.out.println");
+		assertThat(response.getResult().getOutput().getText()).contains("System.out.println");
 	}
 
 }
