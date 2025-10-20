@@ -38,7 +38,7 @@ To quickly get started with Spring AI Alibaba, add 'spring-ai-alibaba-starter-da
 ```
 
 #### Declare ChatClient
-Decare `ChatClient` an instance that would have `DashScopeChatModel` automatically injected.
+Decare a `ChatClient` instance that would have `DashScopeChatModel` automatically injected.
 
 ```java
 @RestController
