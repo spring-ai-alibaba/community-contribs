@@ -234,7 +234,7 @@ public class DashScopeAiStreamFunctionCallingHelperTests {
 		ChatCompletionFunction function = new ChatCompletionFunction(functionName, arguments);
 		ToolCall toolCall = new ToolCall(toolId, "function", function);
 		ChatCompletionMessage message = new ChatCompletionMessage("", Role.ASSISTANT, null, null, List.of(toolCall),
-				null);
+				null, null);
 		Choice choice = new Choice(finishReason, message, null);
 		ChatCompletionOutput output = new ChatCompletionOutput(null, List.of(choice), null);
 		TokenUsage usage = new TokenUsage(10, 5, 15, null, null, null, null, null, null);
@@ -248,11 +248,60 @@ public class DashScopeAiStreamFunctionCallingHelperTests {
 		ChatCompletionFunction function2 = new ChatCompletionFunction("function-2", "{\"param2\":\"value2\"}");
 		ToolCall toolCall2 = new ToolCall("tool-2", "function", function2);
 		ChatCompletionMessage message = new ChatCompletionMessage("", Role.ASSISTANT, null, null,
-				List.of(toolCall1, toolCall2), null);
+				List.of(toolCall1, toolCall2), null, null);
 		Choice choice = new Choice(null, message, null);
 		ChatCompletionOutput output = new ChatCompletionOutput(null, List.of(choice), null);
 		TokenUsage usage = new TokenUsage(10, 5, 15, null, null, null, null, null, null);
 		return new ChatCompletionChunk(requestId, output, usage);
+	}
+
+	@Test
+	void testMergeWithPartialFlag() {
+		// Test merging of partial flag in streaming scenario
+		// This tests the partial mode feature for code completion
+		ChatCompletionMessage previousMessage = new ChatCompletionMessage("def fibonacci(n):\n", Role.ASSISTANT, 
+				null, null, null, null, true);
+		Choice previousChoice = new Choice(null, previousMessage, null);
+		ChatCompletionOutput previousOutput = new ChatCompletionOutput(null, List.of(previousChoice), null);
+		ChatCompletionChunk previous = new ChatCompletionChunk("request-1", previousOutput, null);
+
+		ChatCompletionMessage currentMessage = new ChatCompletionMessage("    if n <= 1:\n", Role.ASSISTANT, 
+				null, null, null, null, null);
+		Choice currentChoice = new Choice(null, currentMessage, null);
+		ChatCompletionOutput currentOutput = new ChatCompletionOutput(null, List.of(currentChoice), null);
+		ChatCompletionChunk current = new ChatCompletionChunk("request-1", currentOutput, null);
+
+		ChatCompletionChunk result = helperWithIncrementalOutput.merge(previous, current);
+
+		assertNotNull(result);
+		assertEquals("request-1", result.requestId());
+		ChatCompletionMessage mergedMessage = result.output().choices().get(0).message();
+		// The partial flag from previous should be preserved
+		assertEquals(true, mergedMessage.partial());
+		// Content should be from current (in incremental mode)
+		assertEquals("    if n <= 1:\n", mergedMessage.content());
+	}
+
+	@Test
+	void testMergeWithPartialFlagInCurrent() {
+		// Test when current chunk has partial flag
+		ChatCompletionMessage previousMessage = new ChatCompletionMessage("def fibonacci(n):\n", Role.ASSISTANT, 
+				null, null, null, null, null);
+		Choice previousChoice = new Choice(null, previousMessage, null);
+		ChatCompletionOutput previousOutput = new ChatCompletionOutput(null, List.of(previousChoice), null);
+		ChatCompletionChunk previous = new ChatCompletionChunk("request-1", previousOutput, null);
+
+		ChatCompletionMessage currentMessage = new ChatCompletionMessage("    if n <= 1:\n", Role.ASSISTANT, 
+				null, null, null, null, true);
+		Choice currentChoice = new Choice(null, currentMessage, null);
+		ChatCompletionOutput currentOutput = new ChatCompletionOutput(null, List.of(currentChoice), null);
+		ChatCompletionChunk current = new ChatCompletionChunk("request-1", currentOutput, null);
+
+		ChatCompletionChunk result = helperWithIncrementalOutput.merge(previous, current);
+
+		assertNotNull(result);
+		// The partial flag from current should take precedence
+		assertEquals(true, result.output().choices().get(0).message().partial());
 	}
 
 }
