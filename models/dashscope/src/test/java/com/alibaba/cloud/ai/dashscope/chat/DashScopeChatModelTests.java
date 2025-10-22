@@ -491,7 +491,7 @@ class DashScopeChatModelTests {
 		ToolCall nullNameToolCall = new ToolCall("tool-call-id", "function", nullNameFunction);
 
 		ChatCompletionMessage nullNameToolMessage = new ChatCompletionMessage("", ChatCompletionMessage.Role.ASSISTANT,
-				null, null, List.of(nullNameToolCall), null);
+				null, null, List.of(nullNameToolCall), null, null);
 		Choice nullNameChoice = new Choice(ChatCompletionFinishReason.TOOL_CALLS, nullNameToolMessage, null);
 
 		// Add non-null TokenUsage with correct parameters - 9 parameters total
@@ -513,6 +513,62 @@ class DashScopeChatModelTests {
 			// Tool calls with null names should be filtered out
 			assertThat(response.getResults().get(0).getOutput().getToolCalls()).isEmpty();
 		}).doesNotThrowAnyException();
+	}
+
+	@Test
+	void testPartialModeForCodeCompletion() {
+		// Test partial mode support for code completion scenarios (Issue #298)
+		List<Message> messages = List.of(new UserMessage("Please complete this Fibonacci function."),
+				new AssistantMessage("def calculate_fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n",
+						java.util.Map.of("partial", true)));
+
+		Prompt prompt = new Prompt(messages, DashScopeChatOptions.builder().build());
+		ChatCompletionRequest request = chatModel.createRequest(prompt, false);
+
+		List<ChatCompletionMessage> requestMessages = request.input().messages();
+		assertThat(requestMessages).isNotEmpty();
+		assertThat(requestMessages.size()).isEqualTo(2);
+
+		ChatCompletionMessage lastMessage = requestMessages.get(1);
+		assertThat(lastMessage.role()).isEqualTo(ChatCompletionMessage.Role.ASSISTANT);
+		assertThat(lastMessage.partial()).isNotNull();
+		assertThat(lastMessage.partial()).isTrue();
+		assertThat(lastMessage.content()).contains("def calculate_fibonacci");
+	}
+	
+	@Test
+	void testPartialModeWithStringValue() {
+		// Test partial mode when set as string "true" in metadata
+		AssistantMessage assistantMessage = new AssistantMessage(
+				"def calculate_fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n",
+				java.util.Map.of("partial", "true"));
+
+		List<Message> messages = List.of(new UserMessage("Please complete this function."), assistantMessage);
+
+		Prompt prompt = new Prompt(messages, DashScopeChatOptions.builder().build());
+		ChatCompletionRequest request = chatModel.createRequest(prompt, false);
+
+		List<ChatCompletionMessage> requestMessages = request.input().messages();
+		ChatCompletionMessage lastMessage = requestMessages.get(requestMessages.size() - 1);
+
+		assertThat(lastMessage.partial()).isNotNull();
+		assertThat(lastMessage.partial()).isTrue();
+	}
+
+	@Test
+	void testWithoutPartialMode() {
+		// Test normal assistant message without partial flag
+		AssistantMessage assistantMessage = new AssistantMessage("This is a normal response");
+
+		List<Message> messages = List.of(new UserMessage("Hello"), assistantMessage);
+
+		Prompt prompt = new Prompt(messages, DashScopeChatOptions.builder().build());
+		ChatCompletionRequest request = chatModel.createRequest(prompt, false);
+
+		List<ChatCompletionMessage> requestMessages = request.input().messages();
+		ChatCompletionMessage lastMessage = requestMessages.get(requestMessages.size() - 1);
+
+		assertThat(lastMessage.partial()).isNull();
 	}
 
 }

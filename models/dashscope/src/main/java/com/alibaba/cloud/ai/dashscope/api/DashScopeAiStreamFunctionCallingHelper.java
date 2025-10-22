@@ -110,6 +110,7 @@ public class DashScopeAiStreamFunctionCallingHelper {
 		String toolCallId = (StringUtils.hasText(current.toolCallId()) ? current.toolCallId() : previous.toolCallId());
 		String reasoningContent = (current.reasoningContent() != null ? current.reasoningContent()
 				: previous.reasoningContent());
+		Boolean partial = (current.partial() != null ? current.partial() : previous.partial());
 
 		List<ToolCall> toolCalls = new ArrayList<>();
 		ToolCall lastPreviousTooCall = null;
@@ -139,7 +140,7 @@ public class DashScopeAiStreamFunctionCallingHelper {
 				toolCalls.add(lastPreviousTooCall);
 			}
 		}
-		return new ChatCompletionMessage(content, role, name, toolCallId, toolCalls, reasoningContent);
+		return new ChatCompletionMessage(content, role, name, toolCallId, toolCalls, reasoningContent, partial);
 	}
 
 	private ToolCall merge(ToolCall previous, ToolCall current) {
