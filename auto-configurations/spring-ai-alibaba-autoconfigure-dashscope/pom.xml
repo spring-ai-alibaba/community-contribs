@@ -40,7 +40,6 @@
             <groupId>com.alibaba.cloud.ai</groupId>
             <artifactId>spring-ai-alibaba-dashscope</artifactId>
             <version>${revision}</version>
-            <optional>true</optional>
         </dependency>
 
         <dependency>
