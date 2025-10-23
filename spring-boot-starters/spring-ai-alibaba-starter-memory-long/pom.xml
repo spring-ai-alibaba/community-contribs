@@ -22,6 +22,11 @@
     <dependencies>
         <dependency>
             <groupId>com.alibaba.cloud.ai</groupId>
+            <artifactId>spring-ai-alibaba-autoconfigure-memory-long</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud.ai</groupId>
             <artifactId>spring-ai-alibaba-starter-memory-mem0</artifactId>
             <version>${revision}</version>
         </dependency>
