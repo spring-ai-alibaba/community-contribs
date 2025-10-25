@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 com.alibaba.cloud.ai.autoconfigure.memory.ChatMemoryAutoConfiguration
+com.alibaba.cloud.ai.autoconfigure.memory.H2ChatMemoryAutoConfiguration
 com.alibaba.cloud.ai.autoconfigure.memory.SQLiteChatMemoryAutoConfiguration
 com.alibaba.cloud.ai.autoconfigure.memory.MysqlChatMemoryAutoConfiguration
 com.alibaba.cloud.ai.autoconfigure.memory.OracleChatMemoryAutoConfiguration
@@ -27,4 +28,3 @@ com.alibaba.cloud.ai.autoconfigure.memory.ElasticsearchChatMemoryAutoConfigurati
 com.alibaba.cloud.ai.autoconfigure.memory.MongoDBChatMemoryAutoConfiguration
 com.alibaba.cloud.ai.autoconfigure.memory.TablestoreChatMemoryAutoConfiguration
 com.alibaba.cloud.ai.autoconfigure.memory.MemcachedChatMemoryAutoConfiguration
-com.alibaba.cloud.ai.autoconfigure.memory.Mem0ChatMemoryAutoConfiguration
